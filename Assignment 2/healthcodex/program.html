@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Program | Health CodeX Workshop 2023</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <img src="images/logo.png" alt="Health CodeX logo: medical cross with code brackets" width="80" height="80">
+    <p class="site-title">Health CodeX Workshop 2023</p>
+    <nav aria-label="Main navigation">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="program.html" aria-current="page">Program</a></li>
+        <li><a href="registration.html">Register</a></li>
+      </ul>
+    </nav>
+  </header>
+
+<!-- 
+For table design reference:
+<table>	Starts the table
+<caption>	Gives the table a title
+<tr>	Starts a horizontal row
+<th>	A heading cell, such as “Time”.
+<td>	An ordinary cell containing session information
+<thead> Groups the table’s heading rows
+<tbody>	Groups the table’s data rows
+colspan="4"	As mentioned in lecture make one cell stretch across four columns, not gonna need here CSS will style accordingly
+class="program-table" ~ a table name which we can target w/ CSS later
+-->
+
+  <main>
+  <h1>Workshop Program</h1>
+
+  <p>
+    Join us for a day of presentations, learning and discussion on health messaging
+    and medical data classification.
+  </p>
+
+  <p>
+    All sessions take place in the Main Lecture Theatre.
+    (Speakers, location and session details are fictional for this assignment.)
+  </p>
+
+  <section aria-labelledby="schedule-heading">
+    <h2 id="schedule-heading">Daily Schedule</h2>
+    
+    <!-- Allows side-scrolling on phones, smaller screens-->
+    <div
+      class="table-container"
+      role="region"
+      aria-label="Workshop schedule, scroll horizontally on smaller screens"
+      tabindex="0"
+    >
+    <table class="program-table">
+      <caption>
+        Health CodeX Workshop 2023 ~ session times and speakers
+      </caption>
+
+      <thead>
+        <tr>
+          <th scope="col">Time</th>
+          <th scope="col">Session</th>
+          <th scope="col">Speaker</th>
+          <th scope="col">Details</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>08:30–09:00</td>
+          <td>Registration and Welcome</td>
+          <td>Workshop organisers</td>
+          <td>Collect your name badge and meet other attendees.</td>
+        </tr>
+
+        <tr>
+          <td>09:00–09:45</td>
+          <td>Plenary: Coding Medical Information with ICD-10-AM</td>
+          <td>Dr Stephen Strange</td>
+          <td>
+            A brief introduction to ICD-10-AM and disease classification.
+            <a href="ICD10.html">Read about ICD-10-AM</a>.
+          </td>
+        </tr>
+
+        <tr>
+          <td>09:45–10:15</td>
+          <td>From ICD-9 to ICD-10</td>
+          <td>Hal Jordan</td>
+          <td>
+            Exploring changes in disease classification and the challenges
+            of working with older coded records.
+          </td>
+        </tr>
+
+        <tr>
+          <td>10:15–10:45</td>
+          <td>Morning Tea</td>
+          <td>All attendees</td>
+          <td>Refreshments and networking.</td>
+        </tr>
+
+        <tr>
+          <td>10:45–11:15</td>
+          <td>SNOMED CT in Clinical Documentation</td>
+          <td>Dr Priya Shah</td>
+          <td>
+            A discussion of clinical terminology and recording
+            patient information.
+          </td>
+        </tr>
+
+        <tr>
+          <td>11:15–11:45</td>
+          <td>Read Codes and ICPC</td>
+          <td>Tony Stark</td>
+          <td>
+            Exploring programming approaches utlised in primary care.
+          </td>
+        </tr>
+
+        <tr>
+          <td>11:45–12:15</td>
+          <td>DICOM and Medical Imaging</td>
+          <td>John Stewart</td>
+          <td>
+            An introduction to exchanging medical images and
+            associated information.
+          </td>
+        </tr>
+
+        <tr>
+          <td>12:15–13:00</td>
+          <td>Lunch</td>
+          <td>All attendees</td>
+          <td>Lunch and informal discussion.</td>
+        </tr>
+
+        <tr>
+          <td>13:00–13:45</td>
+          <td>Plenary: Health Messaging with HL7</td>
+          <td>Dr Bruce Banner</td>
+          <td>
+            An introduction to standards for exchanging health information.
+            <a href="HL7.html">Read about HL7</a>.
+          </td>
+        </tr>
+
+        <tr>
+          <td>13:45–14:15</td>
+          <td>Introducing FHIR</td>
+          <td>Ichigo Kurosaki</td>
+          <td>
+            A discussion of FHIR and its role in connecting
+            healthcare applications.
+          </td>
+        </tr>
+
+        <tr>
+          <td>14:15–14:45</td>
+          <td>Connected Devices: Continua and ISO/IEEE 11073</td>
+          <td>Dr Hermione Granger</td>
+          <td>
+            Exploring interoperability between personal health devices
+            and health information systems.
+          </td>
+        </tr>
+
+        <tr>
+          <td>14:45–15:15</td>
+          <td>Afternoon Tea</td>
+          <td>All attendees</td>
+          <td>Refreshments and networking.</td>
+        </tr>
+
+        <tr>
+          <td>15:15–16:00</td>
+          <td>Panel Discussion and Closing Remarks</td>
+          <td>All speakers</td>
+          <td>
+            Questions and discussion about applying coding and
+            messaging standards in practice.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <section aria-labelledby="registration-heading">
+    <h2 id="registration-heading">Attend the Workshop</h2>
+    <p>
+      Keen in joining us?
+      <a href="registration.html">Register here</a>.
+    </p>
+  </section>
+</main>
+
+  <footer class="site-footer">
+    <p>&copy; 2023 Health CodeX Workshop</p>
+  </footer>
+</body>
+</html>

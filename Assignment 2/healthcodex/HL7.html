@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HL7 | Health CodeX Workshop 2023</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <img src="images/logo.png" alt="Health CodeX logo: medical cross with code brackets" width="80" height="80">
+    <p class="site-title">Health CodeX Workshop 2023</p>
+    <nav aria-label="Main navigation">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="program.html">Program</a></li>
+        <li><a href="registration.html">Register</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+  <h1>HL7: Exchanging Health Information</h1>
+
+  <p>
+    Plenary speaker: Dr Bruce Banner<br>
+    Time: 13:00–13:45
+  </p>
+
+  <section>
+    <h2>What is HL7?</h2>
+    <p>
+      Health Level Seven International, abbreviated as HL7, develops
+      standards for sharing electronic health information. Healthcare
+      organisations often use differing computer systems, so they need
+      joint ways to organise and exchange data. HL7 forms these standards 
+      and describes how information should be structured and communicated between these systems.
+    </p>
+  </section>
+
+  <section>
+    <h2>Why are messaging standards needed?</h2>
+    <p>
+      A hospital may use separate applications for patient registration,
+      laboratory testing and clinical records. These applications need
+      to exchange information without staff repetitively entering the
+      same details. For example, a laboratory result needs to reach
+      the clinical system and be associated with the correct patient.
+      Agreed message structures help the receiving system interpret
+      the information.
+    </p>
+  </section>
+
+  <section>
+    <h2>Different HL7 Standards</h2>
+    <p>
+      HL7 provides several approaches to exchanging information.
+      HL7 Version 2 supports messaging between healthcare applications.
+      Clinical Document Architecture, or CDA, defines the structure
+      of clinical documents exchanged between systems.
+    </p>
+    <p>
+      Fast Healthcare Interoperability Resources, or FHIR, is another
+      HL7 standard. It organises information into reusable building
+      blocks called resources. These can represent information such
+      as patients and clinical observations. Applications can exchange
+      these resources to support healthcare workflows.
+    </p>
+  </section>
+
+  <section>
+    <h2>Messaging and Medical Codes</h2>
+    <p>
+      Messaging standards and medical classification systems have
+      different jobs. HL7 standards help structure and exchange
+      information, while classification systems such as ICD-10-AM
+      provide codes for diseases and related health problems.
+      A system exchanging health information may therefore use
+      both a messaging standard and coded clinical information.
+    </p>
+  </section>
+
+  <section>
+    <h2>Further Reading</h2>
+    <ul>
+      <li>
+        <a href="https://www.hl7.org/implement/standards/">
+          HL7 International: Introduction to HL7 Standards
+        </a>
+      </li>
+      <li>
+        <a href="https://www.hl7.org/fhir/overview.html">
+          HL7: FHIR Overview
+        </a>
+      </li>
+    </ul>
+  </section>
+  <!-- Point to a file in website, external links requires https://... -->
+  <p><a href="program.html">Back to the workshop program</a></p>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2023 Health CodeX Workshop</p>
+  </footer>
+</body>
+</html>

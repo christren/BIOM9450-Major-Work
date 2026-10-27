@@ -1,0 +1,5 @@
+model,cv_macro_f1,test_accuracy,test_precision,test_recall,test_macro_f1,best_params
+Baseline (majority),0.0476,0.1667,0.0278,0.1667,0.0476,{}
+Decision Tree,0.7873,0.8192,0.8221,0.8192,0.8196,"{'max_depth': 8, 'min_samples_leaf': 1}"
+Random Forest,0.8728,0.8842,0.8848,0.8842,0.8838,"{'max_depth': 15, 'min_samples_leaf': 1, 'n_estimators': 200}"
+SVM (RBF),0.8534,0.8717,0.8794,0.8717,0.8729,"{'svc__C': 1, 'svc__gamma': 'scale'}"

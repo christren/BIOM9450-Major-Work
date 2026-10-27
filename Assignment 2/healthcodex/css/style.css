@@ -1,0 +1,413 @@
+/* Health CodeX - stylesheet */
+
+/*
+CSS syntax for reference: 
+margin	Space outside an element
+padding	Space inside an element
+max-width	Prevents an element becoming too wide
+display: flex	Arranges items such as navigation links or buttons in a flexible row
+display: grid	Arranges content into rows and columns
+:hover	Applies when the mouse is over an element
+:focus-visible	Gives keyboard navigation a visible focus outline
+@media	Applies certain styles only when a condition is met
+*/
+
+/* ---------- General page settings ---------- */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #203047;
+  background-color: #f2f5f8;
+}
+
+/* Keep JavaScript-controlled hidden elements hidden */
+[hidden] {
+  display: none !important;
+}
+
+h1,
+h2 {
+  line-height: 1.3;
+  color: #12334a;
+}
+
+h1 {
+  margin-top: 0;
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.4rem;
+}
+
+p,
+li,
+dd {
+  overflow-wrap: anywhere;
+}
+
+a {
+  color: #006b70;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: #12334a;
+}
+
+/* Visible keyboard focus for links, fields and buttons */
+:focus-visible {
+  outline: 3px solid #a04c00;
+  outline-offset: 3px;
+}
+
+
+/* ---------- Header and navigation ---------- */
+
+.site-header {
+  display: grid;
+  grid-template-columns: 80px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 20px;
+  padding: 24px;
+  color: white;
+  background-color: #12334a;
+}
+
+.site-header img {
+  display: block;
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  border-radius: 12px;
+  background-color: white;
+}
+
+.site-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.site-header nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-header nav a {
+  display: block;
+  padding: 8px 14px;
+  border-radius: 6px;
+  color: white;
+  text-decoration: none;
+}
+
+.site-header nav a:hover,
+.site-header nav a[aria-current="page"] {
+  color: #12334a;
+  background-color: #d8f3f0;
+}
+
+
+/* ---------- Main content ---------- */
+
+main {
+  width: calc(100% - 40px);
+  max-width: 1100px;
+  margin: 32px auto;
+  padding: 32px;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: 0 3px 14px rgb(0 0 0 / 8%);
+}
+
+main section + section {
+  margin-top: 32px;
+}
+
+main li {
+  margin-bottom: 8px;
+}
+
+iframe {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: 350px;
+  margin-top: 20px;
+  border: 0;
+  border-radius: 8px;
+}
+
+
+/* ---------- Program table ---------- */
+
+.table-container {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.program-table {
+  width: 100%;
+  min-width: 650px;
+  border-collapse: collapse;
+}
+
+.program-table caption {
+  padding: 12px 0;
+  font-weight: bold;
+  text-align: left;
+}
+
+.program-table th,
+.program-table td {
+  padding: 14px 18px;
+  border: 1px solid #c7d2da;
+  text-align: left;
+  vertical-align: top;
+}
+
+.program-table th {
+  color: white;
+  background-color: #12334a;
+}
+
+.program-table tbody tr:nth-child(even) {
+  background-color: #f0f6f8;
+}
+
+.program-table td:first-child {
+  white-space: nowrap;
+}
+
+
+/* ---------- Registration form ---------- */
+
+#registrantInfo {
+  max-width: 760px;
+}
+
+fieldset {
+  min-width: 0;
+  margin: 0 0 24px;
+  padding: 24px;
+  border: 1px solid #9cabb7;
+  border-radius: 8px;
+}
+
+legend {
+  padding: 0 8px;
+  color: #12334a;
+  font-size: 1.15rem;
+  font-weight: bold;
+}
+
+.form-field {
+  margin-bottom: 20px;
+}
+
+.form-field:last-child {
+  margin-bottom: 0;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+input,
+select,
+button {
+  font: inherit;
+}
+
+input:not([type="checkbox"]),
+select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #6b7c8a;
+  border-radius: 5px;
+  color: #203047;
+  background-color: white;
+}
+
+input::placeholder {
+  color: #586779;
+  opacity: 1;
+}
+
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin: 0 8px 0 0;
+  vertical-align: middle;
+  accent-color: #006b70;
+}
+
+input[type="checkbox"] + label {
+  display: inline;
+  font-weight: normal;
+}
+
+#passwordHint {
+  margin: 6px 0;
+  color: #4b596a;
+  font-size: 0.9rem;
+}
+
+.error {
+  display: block;
+  margin-top: 6px;
+  color: #a51d2d;
+  font-size: 0.9rem;
+}
+
+.error:empty {
+  display: none;
+}
+
+[aria-invalid="true"] {
+  border: 2px solid #a51d2d !important;
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+button {
+  padding: 11px 20px;
+  border: 2px solid #006b70;
+  border-radius: 6px;
+  color: white;
+  background-color: #006b70;
+  cursor: pointer;
+}
+
+button:hover {
+  border-color: #12334a;
+  background-color: #12334a;
+}
+
+button[type="reset"] {
+  color: #12334a;
+  background-color: white;
+}
+
+button[type="reset"]:hover {
+  background-color: #e7eef3;
+}
+
+
+/* ---------- Confirmation details ---------- */
+
+#registrationSummary dl {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: 12px 24px;
+}
+
+#registrationSummary dt {
+  font-weight: bold;
+}
+
+#registrationSummary dd {
+  margin: 0;
+}
+
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+  padding: 28px 24px;
+  color: white;
+  background-color: #12334a;
+}
+
+.site-footer h2 {
+  color: white;
+}
+
+.site-footer a {
+  color: #b8f0e8;
+}
+
+.site-footer a:hover {
+  color: white;
+}
+
+
+/* ---------- Smaller screens ---------- */
+
+@media (max-width: 800px) {
+  .site-header {
+    grid-template-columns: 80px minmax(0, 1fr);
+  }
+
+  .site-header nav {
+    grid-column: 1 / -1;
+  }
+
+  main {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .site-header {
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .site-title {
+    font-size: 1.2rem;
+  }
+
+  main {
+    width: calc(100% - 24px);
+    margin: 16px auto;
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  fieldset {
+    padding: 16px;
+  }
+
+  iframe {
+    height: 260px;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .form-actions button {
+    width: 100%;
+  }
+
+  #registrationSummary dl {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+
+  #registrationSummary dd {
+    margin-bottom: 14px;
+  }
+}

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration | Health CodeX Workshop 2023</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/validation.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <img src="images/logo.png" alt="Health CodeX logo: medical cross with code brackets" width="80" height="80">
+    <p class="site-title">Health CodeX Workshop 2023</p>
+    <nav aria-label="Main navigation">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="program.html">Program</a></li>
+        <li><a href="registration.html" aria-current="page">Register</a></li>
+      </ul>
+    </nav>
+  </header>
+
+<!--
+HTML glossary for reference:
+<form>	Groups the controls that belong to this registration
+<fieldset>	Groups related fields, usually with a visible outline
+<legend>	Gives a field group its title
+<label for="firstName">	Connects the label to the input whose id is firstName
+<input>	Creates an input control, such as a text box or checkbox
+<select> and <option>	Create a dropdown and its choices
+id	Identifies an element so JavaScript can find it
+name	Identifies a field’s value when the form is submitted
+<span class="error">	An initially empty space for an error message
+
+novalidate: switches off user browsers automatic submission checks, will write on JS checks for invalids
+-->
+
+<main>
+  <h1>Workshop Registration</h1>
+
+  <p>
+    Complete the form below to register for Health CodeX Workshop 2023.
+    Fields marked with an asterisk (*) are required.
+  </p>
+
+  <p>
+    This is a assignment demonstration. Please use fictional details
+    and a test password, not a real password. 
+  </p>
+
+  <form
+    id="registrantInfo"
+    action="regSuccess.html"
+    method="get"
+    novalidate
+  >
+    <fieldset>
+      <legend>Personal Details</legend>
+
+      <div class="form-field">
+        <label for="firstName">First name *</label>
+        <input
+          type="text"
+          id="firstName"
+          name="firstName"
+          autocomplete="given-name"
+          aria-describedby="firstNameError"
+          required
+        >
+        <span
+          id="firstNameError"
+          class="error"
+          aria-live="polite"
+        ></span>
+      </div>
+
+      <div class="form-field">
+        <label for="lastName">Last name *</label>
+        <input
+          type="text"
+          id="lastName"
+          name="lastName"
+          autocomplete="family-name"
+          aria-describedby="lastNameError"
+          required
+        >
+        <span
+          id="lastNameError"
+          class="error"
+          aria-live="polite"
+        ></span>
+      </div>
+
+      <div class="form-field">
+        <label for="dob">Date of birth (dd/mm/yyyy) *</label>
+        <input
+          type="text"
+          id="dob"
+          name="dob"
+          placeholder="dd/mm/yyyy"
+          maxlength="10"
+          aria-describedby="dobError"
+          required
+        >
+        <span
+          id="dobError"
+          class="error"
+          aria-live="polite"
+        ></span>
+      </div>
+
+      <div class="form-field">
+        <label for="gender">Gender *</label>
+        <select
+          id="gender"
+          name="gender"
+          aria-describedby="genderError"
+          required
+        >
+          <option value="">Please select</option>
+          <option value="Female">Female</option>
+          <option value="Male">Male</option>
+          <option value="Non-binary">Non-binary</option>
+          <option value="Self-described">Self-described</option>
+          <option value="Prefer not to say">Prefer not to say</option>
+        </select>
+        <span
+          id="genderError"
+          class="error"
+          aria-live="polite"
+        ></span>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Account Details</legend>
+
+      <div class="form-field">
+        <label for="email">Email address *</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          autocomplete="email"
+          aria-describedby="emailError"
+          required
+        >
+        <span
+          id="emailError"
+          class="error"
+          aria-live="polite"
+        ></span>
+      </div>
+
+      <!-- Password fields deliberately have no name attribute, as they must not be included in the GET URL. -->
+
+      <div class="form-field">
+        <label for="password">Password *</label>
+        <input
+          type="password"
+          id="password"
+          autocomplete="new-password"
+          aria-describedby="passwordHint passwordError"
+          required
+        >
+        <p id="passwordHint">
+          Use at least 8 characters, including an uppercase letter,
+          a lowercase letter and a number.
+        </p>
+        <span
+          id="passwordError"
+          class="error"
+          aria-live="polite"
+        ></span>
+      </div>
+
+      <div class="form-field">
+        <label for="confirmPassword">Re-enter password *</label>
+        <input
+          type="password"
+          id="confirmPassword"
+          autocomplete="new-password"
+          aria-describedby="confirmPasswordError"
+          required
+        >
+        <span
+          id="confirmPasswordError"
+          class="error"
+          aria-live="polite"
+        ></span>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Workshop Preferences</legend>
+
+      <div class="form-field">
+        <label for="affiliation">Affiliation *</label>
+        <input
+          type="text"
+          id="affiliation"
+          name="affiliation"
+          placeholder="University, workplace or Independent"
+          autocomplete="organization"
+          aria-describedby="affiliationError"
+          required
+        >
+        <span
+          id="affiliationError"
+          class="error"
+          aria-live="polite"
+        ></span>
+      </div>
+
+      <div class="form-field">
+        <label for="dietary">Dietary preferences *</label>
+        <select
+          id="dietary"
+          name="dietary"
+          aria-describedby="dietaryError"
+          required
+        >
+          <option value="">Please select</option>
+          <option value="None">No dietary requirements</option>
+          <option value="Vegetarian">Vegetarian</option>
+          <option value="Vegan">Vegan</option>
+          <option value="Gluten-free">Gluten-free</option>
+          <option value="Halal">Halal</option>
+          <option value="Other">Other</option>
+        </select>
+        <span
+          id="dietaryError"
+          class="error"
+          aria-live="polite"
+        ></span>
+      </div>
+
+      <div class="form-field" id="otherDietaryGroup" hidden>
+        <label for="otherDietary">
+          Please specify your dietary requirements *
+        </label>
+        <input
+          type="text"
+          id="otherDietary"
+          name="otherDietary"
+          aria-describedby="otherDietaryError"
+          disabled
+        >
+        <span
+          id="otherDietaryError"
+          class="error"
+          aria-live="polite"
+        ></span>
+      </div>
+
+      <div class="form-field">
+        <input
+          type="checkbox"
+          id="marketing"
+          name="marketing"
+          value="yes"
+        >
+        <label for="marketing">
+          I would like to receive promotional and marketing materials.
+        </label>
+      </div>
+    </fieldset>
+
+    <div class="form-actions">
+      <button type="submit" id="submit">Register now</button>
+      <button type="reset">Reset form</button>
+    </div>
+  </form>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2023 Health CodeX Workshop</p>
+  </footer>
+</body>
+</html>
