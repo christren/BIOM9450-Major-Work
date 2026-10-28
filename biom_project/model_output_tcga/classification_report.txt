@@ -1,0 +1,14 @@
+Best model by CV macro-F1: Random Forest
+
+              precision    recall  f1-score   support
+
+       Blood      0.784     0.725     0.753        40
+       Brain      0.956     0.853     0.902       102
+      Breast      0.862     0.866     0.864       202
+       Liver      0.887     0.875     0.881        72
+    Pancreas      0.828     0.686     0.750        35
+    Prostate      0.610     0.735     0.667        98
+
+    accuracy                          0.820       549
+   macro avg      0.821     0.790     0.803       549
+weighted avg      0.830     0.820     0.823       549

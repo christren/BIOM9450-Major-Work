@@ -1,3 +1,6 @@
+# inspect_data.py
+# Written by Christian Schmooel (z5417031)
+
 import pandas as pd, os
 for c in ["laml","lgg","brca","lihc","paad","prad"]:
     p = f"tcga_data/{c}/data_mutations.txt"

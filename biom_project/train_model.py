@@ -1,11 +1,13 @@
 
 """
-BIOM9450 Major Project - cancer type prediction model pipeline
+BIOM9450 Major Project - cancer type prediction model pipeline prototype 
 Usage:  
 * python train_model.py 
-* Mutation_original.csv
+* tcga_data datasets 
 
-written by Christian Schmooel (z5417031), with AI-assistance for ideation and debugging(Claude Sonnet 5.5)
+written by Christian Schmooel (z5417031), with AI-assistance for ideation and debugging (Claude Sonnet 5.5)
+
+!! PROTOTYPE: Used as practice exercise following discussion with course convenor
 
 """
 import sys, json, time

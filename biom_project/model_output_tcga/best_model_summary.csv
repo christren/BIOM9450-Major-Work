@@ -1,0 +1,2 @@
+best_model,test_macro_f1,ci_low,ci_high,shuffled_label_macro_f1
+Random Forest,0.8028,0.7629,0.8404,0.157
