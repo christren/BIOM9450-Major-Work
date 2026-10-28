@@ -1,0 +1,18 @@
+# Datasets (course / TCGA data, large)
+biom_project/tcga_data/
+biom_project/Mutation_original*.csv
+*.maf
+*.maf.gz
+*.tar.gz
+*.zip
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# Editor / OS
+.vscode/
+.DS_Store
+Thumbs.db
