@@ -45,6 +45,52 @@ $name = getFilter('name', 50);
 $category = getFilter('category', 50);
 $registered = getFilter('registered', 20);
 
+// Sorting above results table (extension QOL addition)
+$sortOptions = [
+    'id_desc' => [
+        'label' => 'ID: highest first',
+        'sql' => 'AnimalID DESC',
+    ],
+    'id_asc' => [
+        'label' => 'ID: lowest first',
+        'sql' => 'AnimalID ASC',
+    ],
+    'name_asc' => [
+        'label' => 'Name: A–Z',
+        'sql' => "(Name IS NULL OR TRIM(Name) = '') ASC,
+                  Name ASC, AnimalID ASC",
+    ],
+    'name_desc' => [
+        'label' => 'Name: Z–A',
+        'sql' => "(Name IS NULL OR TRIM(Name) = '') ASC,
+                  Name DESC, AnimalID ASC",
+    ],
+    'price_asc' => [
+        'label' => 'Price: low to high',
+        'sql' => '(ListPrice IS NULL) ASC, ListPrice ASC, AnimalID ASC',
+    ],
+    'price_desc' => [
+        'label' => 'Price: high to low',
+        'sql' => '(ListPrice IS NULL) ASC, ListPrice DESC, AnimalID ASC',
+    ],
+    'category_asc' => [
+        'label' => 'Category: A–Z',
+        'sql' => "(Category IS NULL OR TRIM(Category) = '') ASC,
+                  Category ASC, AnimalID ASC",
+    ],
+    'category_desc' => [
+        'label' => 'Category: Z–A',
+        'sql' => "(Category IS NULL OR TRIM(Category) = '') ASC,
+                  Category DESC, AnimalID ASC",
+    ],
+];
+
+$sort = getFilter('sort', 30);
+
+if (!isset($sortOptions[$sort])) {
+    $sort = 'id_desc';
+}
+
 if (!in_array($registered, ['', 'registered', 'unregistered'], true)) {
     $registered = '';
 }
@@ -92,7 +138,7 @@ try {
         $sql .= ' WHERE ' . implode(' AND ', $conditions);
     }
 
-    $sql .= ' ORDER BY AnimalID DESC';
+    $sql .= ' ORDER BY ' . $sortOptions[$sort]['sql'];
 
     $statement = $pdo->prepare($sql);
     $statement->execute($parameters);
@@ -112,6 +158,7 @@ require __DIR__ . '/includes/header.php';
     <p>Use any combination of filters, or leave them blank to see all animals.</p>
 
     <form method="get" action="animal_search.php">
+        <input type="hidden" name="sort" value="<?= e($sort) ?>">
         <div class="form-grid">
             <div class="field">
                 <label for="name">Animal name</label>
@@ -160,7 +207,30 @@ require __DIR__ . '/includes/header.php';
 </section>
 
 <section class="card results-section">
-    <h2>Results</h2>
+    <div class="results-toolbar">
+        <h2>Results</h2>
+
+        <form class="sort-form" method="get" action="animal_search.php">
+            <input type="hidden" name="name" value="<?= e($name) ?>">
+            <input type="hidden" name="category" value="<?= e($category) ?>">
+            <input type="hidden" name="registered" value="<?= e($registered) ?>">
+
+            <div class="field">
+                <label for="sort">Sort by</label>
+
+                <select id="sort" name="sort">
+                    <?php foreach ($sortOptions as $key => $option): ?>
+                        <option value="<?= e($key) ?>"
+                            <?= $sort === $key ? 'selected' : '' ?>>
+                            <?= e($option['label']) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+
+            <button type="submit">Apply order</button>
+        </form>
+    </div>
 
     <?php if ($errorMessage !== ''): ?>
         <div class="notice error" role="alert">

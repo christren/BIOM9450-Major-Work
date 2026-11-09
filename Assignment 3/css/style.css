@@ -231,3 +231,39 @@ tbody tr:hover {
     text-align: right;
     white-space: nowrap;
 }
+
+.results-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 16px;
+}
+
+.results-toolbar h2 {
+    margin: 0;
+}
+
+.sort-form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 12px;
+}
+
+.sort-form .field {
+    min-width: 210px;
+}
+
+@media (max-width: 640px) {
+    .sort-form,
+    .sort-form .field {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .sort-form button {
+        width: 100%;
+    }
+}
