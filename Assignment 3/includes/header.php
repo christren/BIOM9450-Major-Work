@@ -12,6 +12,7 @@
 
         <nav aria-label="Main navigation">
             <a href="index.php">Home</a>
+            <a href="animal_add.php">Add animal</a>
         </nav>
     </header>
 

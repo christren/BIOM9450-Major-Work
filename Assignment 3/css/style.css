@@ -48,3 +48,76 @@ footer {
     text-align: center;
     color: #596579;
 }
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+    margin: 24px 0;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+label {
+    font-weight: 600;
+}
+
+input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #a8b4c4;
+    border-radius: 8px;
+    font: inherit;
+    background: white;
+}
+
+small {
+    color: #526176;
+}
+
+button {
+    padding: 12px 22px;
+    border: 0;
+    border-radius: 8px;
+    background: #203c58;
+    color: white;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #315a80;
+}
+
+:where(a, input, button):focus-visible {
+    outline: 3px solid #b66b00;
+    outline-offset: 3px;
+}
+
+.notice {
+    margin: 20px 0;
+    padding: 16px;
+    border: 1px solid;
+    border-radius: 8px;
+}
+
+.success {
+    color: #14532d;
+    background: #f0fdf4;
+}
+
+.error {
+    color: #8a1c1c;
+    background: #fff1f2;
+}
+
+@media (max-width: 640px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}
