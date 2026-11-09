@@ -121,3 +121,12 @@ button:hover {
         grid-template-columns: 1fr;
     }
 }
+
+.field-error {
+    color: #8a1c1c;
+    font-weight: 600;
+}
+
+input[aria-invalid="true"] {
+    border-color: #8a1c1c;
+}
