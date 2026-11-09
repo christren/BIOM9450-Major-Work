@@ -1,9 +1,13 @@
 <?php
 
+session_start();
+
 require __DIR__ . '/db.php';
 
 $errors = [];
-$savedId = null;
+
+$savedId = $_SESSION['animal_saved_id'] ?? null;
+unset($_SESSION['animal_saved_id']);
 
 $values = [
     'name' => '',
@@ -54,11 +58,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     : $values['registered'],
             ]);
 
-            $savedId = (int) $pdo->lastInsertId();
+            $_SESSION['animal_saved_id'] = (int) $pdo->lastInsertId();
 
-            foreach ($values as $field => $unused) {
-                $values[$field] = '';
-            }
+            header('Location: animal_add.php', true, 303);
+            exit;
+            
         } catch (PDOException $error) {
             error_log($error->getMessage());
             $errors[] = 'The animal could not be saved. Please try again.';
