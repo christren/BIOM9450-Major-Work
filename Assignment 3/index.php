@@ -43,19 +43,48 @@ require __DIR__ . '/includes/header.php';
 
 ?>
 
-<section class="card home-intro">
-    <p class="eyebrow">PetStore workspace</p>
-    <h1>Manage your totally real store in one place.</h1>
+<?php
+$hasHeroImage = is_file(
+    __DIR__ . '/images/site/petstore-hero.jpg'
+);
+?>
 
-    <p class="home-description">
-        Keep animal records organised, find customers and process
-        merchandise orders with ease.
-    </p>
+<section class="card home-intro <?= $hasHeroImage ? 'has-hero-photo' : '' ?>">
+    <div class="hero-copy">
+        <p class="eyebrow">PetStore workspace</p>
 
-    <div class="form-actions">
-        <a class="button-primary" href="checkout.php">Start an order</a>
-        <a class="button-secondary" href="dashboard.php">View dashboard</a>
+        <h1>A little care.<br>A better-run store.</h1>
+
+        <p class="home-description">
+            Keep animal records organised, find your customers
+            and manage merchandise orders- all in one place.
+        </p>
+
+        <div class="form-actions">
+            <a class="button-primary" href="checkout.php">
+                Start an order
+            </a>
+
+            <a class="button-secondary" href="dashboard.php">
+                View dashboard
+            </a>
+        </div>
+
+        <p class="hero-note">
+            Animals, customers and insights. Thoughtfully connected.
+        </p>
     </div>
+
+    <?php if ($hasHeroImage): ?>
+        <figure class="hero-media">
+            <img
+                src="images/site/petstore-hero.jpg"
+                alt=""
+                width="1200"
+                height="1000"
+                decoding="async">
+        </figure>
+    <?php endif; ?>
 </section>
 
 <section class="home-actions" aria-labelledby="quick-actions-title">
