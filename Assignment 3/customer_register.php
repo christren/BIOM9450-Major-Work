@@ -110,7 +110,9 @@ require __DIR__ . '/includes/header.php';
         <div class="notice success" role="status">
             Customer registered successfully.
             Customer ID: <?= (int) $savedId ?>.
-            You can now find this customer using Find customer.
+            <a href="checkout.php?customer_id=<?= (int) $savedId ?>">
+                Start an order for this customer
+            </a>
         </div>
     <?php endif; ?>
 

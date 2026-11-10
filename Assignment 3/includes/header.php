@@ -17,6 +17,7 @@
             <a href="matching_sales.php">Matching sales</a>
             <a href="customer_lookup.php">Find customer</a>
             <a href="customer_register.php">Register customer</a>
+            <a href="checkout.php">Checkout</a>
         </nav>
     </header>
 
