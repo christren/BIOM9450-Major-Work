@@ -16,6 +16,7 @@
             <a href="animal_search.php">Search animals</a>
             <a href="matching_sales.php">Matching sales</a>
             <a href="customer_lookup.php">Find customer</a>
+            <a href="customer_register.php">Register customer</a>
         </nav>
     </header>
 
