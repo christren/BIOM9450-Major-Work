@@ -260,6 +260,7 @@ require __DIR__ . '/includes/header.php';
                         <th scope="col">Registration</th>
                         <th scope="col">Colour</th>
                         <th scope="col">List price</th>
+                        <th scope="col">Actions</th>
                     </tr>
                 </thead>
 
@@ -297,6 +298,16 @@ require __DIR__ . '/includes/header.php';
                                     : '$' . number_format(
                                         (float) $animal['ListPrice'], 2
                                     ) ?>
+                            </td>
+                            <td>
+                                <a class="button-secondary"
+                                href="animal_edit.php?id=<?= (int) $animal['AnimalID'] ?>"
+                                aria-label="<?= e(
+                                    'Edit animal ' . $animal['AnimalID'] . ': ' .
+                                    ($animal['Name'] ?: 'Unnamed')
+                                ) ?>">
+                                    Edit
+                                </a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
