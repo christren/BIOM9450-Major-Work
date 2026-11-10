@@ -1,21 +1,103 @@
 <?php
 
-require __DIR__ . '/db.php';
-
-$statement = $pdo->query('SELECT COUNT(*) FROM Animal');
-$animalCount = (int) $statement->fetchColumn();
+$actions = [
+    [
+        'group' => 'Animals',
+        'title' => 'Search and edit',
+        'description' => 'Find animals, compare prices and update their records.',
+        'link' => 'animal_search.php',
+    ],
+    [
+        'group' => 'Animals',
+        'title' => 'Add an animal',
+        'description' => 'Register a new animal with an optional photo.',
+        'link' => 'animal_add.php',
+    ],
+    [
+        'group' => 'Customers',
+        'title' => 'Find a customer',
+        'description' => 'Look up customers using live surname suggestions.',
+        'link' => 'customer_lookup.php',
+    ],
+    [
+        'group' => 'Customers',
+        'title' => 'Register a customer',
+        'description' => 'Create a customer record before placing an order.',
+        'link' => 'customer_register.php',
+    ],
+    [
+        'group' => 'Sales',
+        'title' => 'Merchandise checkout',
+        'description' => 'Build a multi-item order with stock checks and a receipt.',
+        'link' => 'checkout.php',
+    ],
+    [
+        'group' => 'Insights',
+        'title' => 'View dashboard',
+        'description' => 'Explore animal categories, store totals and low stock.',
+        'link' => 'dashboard.php',
+    ],
+];
 
 require __DIR__ . '/includes/header.php';
 
 ?>
 
-<section class="card">
-    <h2>Welcome to PetStore</h2>
+<section class="card home-intro">
+    <p class="eyebrow">PetStore workspace</p>
+    <h1>Manage your totally real store in one place.</h1>
 
-    <p>Manage animals, customers, merchandise and sales.</p>
+    <p class="home-description">
+        Keep animal records organised, find customers and process
+        merchandise orders with ease.
+    </p>
 
-    <p>Database connection: working</p>
-    <p>Animals in the database: <?= $animalCount ?></p>
+    <div class="form-actions">
+        <a class="button-primary" href="checkout.php">Start an order</a>
+        <a class="button-secondary" href="dashboard.php">View dashboard</a>
+    </div>
+</section>
+
+<section class="home-actions" aria-labelledby="quick-actions-title">
+    <h2 id="quick-actions-title">Quick actions</h2>
+
+    <div class="action-grid">
+        <?php foreach ($actions as $action): ?>
+            <a class="card action-card"
+               href="<?= htmlspecialchars(
+                   $action['link'], ENT_QUOTES, 'UTF-8'
+               ) ?>">
+
+                <span class="action-group">
+                    <?= htmlspecialchars(
+                        $action['group'], ENT_QUOTES, 'UTF-8'
+                    ) ?>
+                </span>
+
+                <h3><?= htmlspecialchars(
+                    $action['title'], ENT_QUOTES, 'UTF-8'
+                ) ?></h3>
+
+                <p><?= htmlspecialchars(
+                    $action['description'], ENT_QUOTES, 'UTF-8'
+                ) ?></p>
+
+                <span class="action-open" aria-hidden="true">Open →</span>
+            </a>
+        <?php endforeach; ?>
+    </div>
+</section>
+
+<section class="card results-section">
+    <h2>Explore matching purchases</h2>
+
+    <p>
+        Find sales containing an animal and merchandise from the same category.
+    </p>
+
+    <a class="button-secondary" href="matching_sales.php">
+        Open matching-sales report
+    </a>
 </section>
 
 <?php require __DIR__ . '/includes/footer.php'; ?>

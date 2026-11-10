@@ -1,5 +1,7 @@
 <?php
 
+define('JSON_RESPONSE', true);
+
 header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: no-store');
 
