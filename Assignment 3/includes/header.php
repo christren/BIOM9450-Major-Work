@@ -18,6 +18,7 @@
             <a href="customer_lookup.php">Find customer</a>
             <a href="customer_register.php">Register customer</a>
             <a href="checkout.php">Checkout</a>
+            <a href="dashboard.php">Dashboard</a>
         </nav>
     </header>
 
