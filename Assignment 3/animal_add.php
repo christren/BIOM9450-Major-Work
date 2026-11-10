@@ -7,6 +7,10 @@ require __DIR__ . '/includes/upload.php';
 
 $errors = [];
 
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
 $savedId = $_SESSION['animal_saved_id'] ?? null;
 unset($_SESSION['animal_saved_id']);
 
@@ -30,6 +34,15 @@ function escape(string $text): string
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $token = $_POST['csrf_token'] ?? '';
+
+    if (
+        !is_string($token) ||
+        !hash_equals($_SESSION['csrf_token'], $token)
+    ) {
+        $errors[] = 'The form security check failed. Reload and try again.';
+    }
+
     foreach ($values as $field => $unused) {
         $input = $_POST[$field] ?? '';
         $values[$field] = is_string($input) ? trim($input) : '';
@@ -113,6 +126,8 @@ require __DIR__ . '/includes/header.php';
     <?php endif; ?>
 
     <form id="animal-form" method="post" action="animal_add.php" enctype="multipart/form-data">
+        <input type="hidden" name="csrf_token"
+            value="<?= escape($_SESSION['csrf_token']) ?>">
         <div class="form-grid">
             <div class="field">
                 <label for="name">Animal name (required)</label>
