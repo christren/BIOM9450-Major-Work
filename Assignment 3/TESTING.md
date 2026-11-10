@@ -1,67 +1,124 @@
-# Manual Test Log — PetStore Management
+# Testing — PetStore Management
 
-## Evidence status
-The developer reported that feature-by-feature tests passed during the guided build. The assistant reviewed selected repository files but did not run the local website or database. Entries below are a final regression checklist, not independently executed test results.
+## Testing approach
 
-Final-package regression date: TO COMPLETE
-Browser/version: TO COMPLETE
-PHP/MySQL versions: TO COMPLETE
-Isolated review database/folder: TO COMPLETE
+I tested each feature using fictional PetStore data and checked database
+changes in MySQL Workbench. I tested successful operations, invalid inputs,
+empty results and failure handling.
 
-Fill Actual result and Status after testing the final extracted package. Do not replace missing evidence with an assumed pass.
+After completing the application, I repeated the main tests using the final
+packaged version to check that the files, database and configuration worked
+together outside the original development folder.
 
-| ID | Test/action | Expected result | Actual result / evidence | Status |
-| --- | --- | --- | --- | --- |
-| T01 | Add animal without photo | Exactly one row; registration blank becomes NULL | Development pass reported; final result pending | Retest |
-| T02 | Add animal with valid image <=2 MiB | Unique images/ file and matching Animal.Photo; image displays | Development pass reported; final result pending | Retest |
-| T03 | Oversized image and non-image upload | Rejected; no animal/file saved | Development pass reported; final result pending | Retest |
-| T04 | Combine name/category/registration filters | All returned rows satisfy filters | Development pass reported; final result pending | Retest |
-| T05 | No-match search, missing photo | Clear empty result; placeholder for missing photo | Development pass reported; final result pending | Retest |
-| T06 | Sort by name/price in both directions | Correct order, missing values last, filters preserved | Development pass reported; final result pending | Retest |
-| T07 | Matching-sales iframe and SQL verification | Same-sale category match; distinct customer/sale rows | Supplied example: Sale 18, Sherri (Animal 10, Dog), Dog Kennel-Extra Large (Item 4, Dog). Recheck final data | Retest |
-| T08 | Autocomplete duplicate surname Cummings | Distinct IDs; selected record matches SQL | Development pass reported; final result pending | Retest |
-| T09 | Empty/no-match surname and rapid typing | Clear state; old responses do not overwrite newer state | Development pass reported; final result pending | Retest |
-| T10 | Edit fictional animal and reload | Target fields saved; photo/registration preserved; count unchanged | Development pass reported; final result pending | Retest |
-| T11 | Negative price, spaces-only required name, invalid ID | Rejected by appropriate browser/server validation | Development pass reported; final result pending | Retest |
-| T12 | Register fictional customer with 0400 000 000 | One ID; leading zero preserved; lookup works | Development pass reported; final result pending | Retest |
-| T13 | Multi-item checkout with two different products | One sale, two item rows, correct cents total, stock reduced | Development pass reported; enter actual IDs/counts below | Retest |
-| T14 | Later ordered item has insufficient stock | No new Sale/SaleItem rows; all earlier stock restored | Development pass reported; enter before/after evidence below | Retest |
-| T15 | Refresh receipt and resubmit consumed order token | No duplicate sale from refresh/replayed token | Refresh pass reported; explicit token replay evidence pending | Retest |
-| T16 | Dashboard vs SQL, manual/automatic refresh | Counts/category bars/bottom five agree; no full reload | Development pass reported; final result pending | Retest |
-| T17 | Tamper with animal-entry CSRF token | Error; no animal or file saved | Development pass reported; final result pending | Retest |
-| T18 | Temporary invalid configured database, then restore | Home works; APIs return JSON error/500; features recover after restore | Development pass reported; final result pending | Retest |
-| T19 | Keyboard navigation, skip link, narrow viewport | Visible focus; usable controls; internal table scrolling | Development pass reported; record viewport/browser | Retest |
-| T20 | Restore final dump into isolated schema and run extracted ZIP | Installation works without original folder/database | Not yet established | Pending |
+Environment: Windows, PHP 8.5.11 and MySQL 8.0.46.
 
-## Required detailed evidence: successful checkout
-Customer ID: TO COMPLETE
-Sale ID: TO COMPLETE
-Item A ID / quantity / unit price: TO COMPLETE
-Item B ID / quantity / unit price: TO COMPLETE
-Expected total / actual receipt total: TO COMPLETE
-Sale row count before / after: TO COMPLETE
-SaleItem row count before / after: TO COMPLETE
-Stock A before / after: TO COMPLETE
-Stock B before / after: TO COMPLETE
-Evidence screenshot/query output: TO COMPLETE
+## Functional tests
 
-## Required detailed evidence: insufficient-stock rollback
-Choose an available lower-ID item, then a higher-ID item requested above its stock.
-Sale row count before / after: TO COMPLETE (must be equal)
-SaleItem row count before / after: TO COMPLETE (must be equal)
-Lower-ID item / quantity / stock before / after: TO COMPLETE (stock must be unchanged)
-Higher-ID item / requested quantity / stock before / after: TO COMPLETE (stock must be unchanged)
-Displayed error: TO COMPLETE
-Evidence screenshot/query output: TO COMPLETE
-Note: compare rows and stock, not the next AUTO_INCREMENT number.
+| Feature | Test performed | Result |
+| --- | --- | --- |
+| Animal entry | Added animals with and without photos and checked the saved records in MySQL. Blank registration values were stored as NULL. | Passed |
+| Image uploads | Uploaded supported images within the 2 MB limit. Confirmed unique filenames, saved relative paths and correct image display. | Passed |
+| Upload validation | Tried oversized images and unsupported files. Invalid submissions were rejected without creating an animal or saving an image. | Passed |
+| Animal search | Tested individual and combined name, category and registration filters. Checked partial-name matches, no results and missing-photo placeholders. | Passed |
+| Result sorting | Tested name, price, category and ID ordering. Filters remained selected, and missing names/prices appeared last where applicable. | Passed |
+| Matching-sales report | Checked that animal and merchandise categories matched within the same SaleID. Confirmed the iframe displayed distinct customer/sale combinations. | Passed |
+| Customer autocomplete | Tested surname suggestions, empty input, no matches and rapid typing. Older responses did not replace newer results. | Passed |
+| Customer identification | Selected customers with the same surname and compared their details with MySQL. Each selection retrieved the correct CustomerID. | Passed |
+| Animal editing | Changed a fictional animal’s name, breed, category, colour and price. Reopened the record and confirmed the changes persisted without changing its photo or registration. | Passed |
+| Edit validation | Tested negative prices, spaces-only required fields and invalid or nonexistent animal IDs. Invalid requests were rejected with clear messages. | Passed |
+| Customer registration | Registered a fictional customer and retrieved them through autocomplete. Checked that the generated ID was unique and the phone number retained its leading zero. | Passed |
+| Dashboard | Compared animal/customer/sale totals, category counts and the five lowest-stock products with SQL results. Tested manual and automatic refresh. | Passed |
 
-## Optional additional edge-case checks
-- With JavaScript disabled, PHP still rejects invalid required values and invalid quantities.
-- Change a checkout input's data-cents in developer tools: official server prices remain unchanged.
-- Open two independent browser sessions and order against the same low-stock item: stock must not become negative. This concurrency test has not been established by earlier reports.
-- Use fictional text containing apostrophes and HTML-like characters: data remains text, not executable markup.
-- Inspect the final ZIP and Git tracking for real config.php or credential-bearing backups.
-- Run PHP syntax checks on all PHP files from the project folder.
+### Matching-sales verification
 
-## Notes and limitations
-Any destructive/failure tests must use fictional records and preferably the isolated review database. Do not import a dump over the working development database. Capture evidence before and after transactional tests. Clean-install verification and final screenshots remain necessary even if earlier development tests passed.
+I checked Sale 18 directly in MySQL. It contained:
+
+- Animal 10: Sherri, category Dog.
+- Merchandise item 4: Dog Kennel-Extra Large, category Dog.
+
+This confirmed that the report identified a category match within the same
+transaction rather than across separate customer purchases.
+
+## Checkout and transaction tests
+
+### Successful multi-item order
+
+I selected an existing fictional customer and purchased two different
+merchandise products in one order.
+
+I checked that:
+
+- One Sale record and the corresponding SaleItem records were created.
+- Each product’s stock decreased by the ordered quantity.
+- The receipt included the SaleID, customer, quantities and total.
+- The total agreed with the database unit prices rounded to cents.
+- Refreshing the receipt did not create another sale or reduce stock again.
+
+Result: Passed.
+
+### Insufficient-stock rollback
+
+I selected an available lower-ID product followed by a higher-ID product
+with an order quantity above its available stock.
+
+I recorded the sale count, sale-item count and both stock levels before
+submitting. After the order failed, I checked that:
+
+- An insufficient-stock message appeared.
+- No new Sale or SaleItem records remained.
+- Both stock levels were unchanged.
+- The earlier item’s stock reduction had been rolled back.
+
+Result: Passed.
+
+## Validation, security and error handling
+
+| Test | Observed result |
+| --- | --- |
+| Invalid required fields and quantities | Invalid submissions were blocked. Server-side validation also rejected invalid input independently of JavaScript. |
+| Modified animal-entry CSRF token | Submission was rejected without saving an animal or image. |
+| Refresh after successful submissions | Previously completed inserts and orders were not repeated. |
+| Temporary invalid database configuration | Database-dependent pages showed a generic connection error, and API endpoints returned JSON errors. |
+| Configuration restored | Search, customer lookup, dashboard and checkout worked again. |
+
+## Presentation and accessibility
+
+I checked the final racing-green theme and homepage image at desktop and
+narrow-screen widths.
+
+I confirmed that:
+
+- Navigation links and homepage cards opened the correct pages.
+- Active-page highlighting and browser-tab titles were correct.
+- Forms remained readable and usable on smaller screens.
+- Wide tables scrolled within their panels.
+- Keyboard focus indicators and the skip link remained visible.
+- Customer details stayed hidden until a customer was selected.
+- Dashboard chart widths and refresh behaviour still worked.
+- The embedded report retained its own layout.
+
+Result: Passed.
+
+## Final installation and package checks
+
+I completed the following checks before packaging:
+
+- Ran PHP syntax checks across the application files.
+- Exported the final database structure and data.
+- Restored the export into a separate review database.
+- Configured and ran a copy of the application from a new folder.
+- Repeated animal insertion, search, editing and checkout rollback.
+- Checked navigation, uploaded images and relative file paths.
+- Included the SQL export, migration, README and configuration template.
+- Excluded real config.php, credentials, logs and private backup files.
+
+Result: Passed.
+
+## Testing limitations
+
+These checks were performed manually in my local Windows environment.
+They do not establish compatibility with every browser or operating system.
+
+Concurrent checkout from independent browser sessions was not tested.
+The application remains a local learning project without production
+authentication, authorisation or deployment hardening.
