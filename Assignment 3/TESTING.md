@@ -83,7 +83,7 @@ Result: Passed.
 
 ## Presentation and accessibility
 
-I checked the final racing-green theme and homepage image at desktop and
+I checked the final british royal racing green inspired theme and homepage image at desktop and
 narrow-screen widths.
 
 I confirmed that:
