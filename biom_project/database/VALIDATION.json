@@ -1,0 +1,26 @@
+{
+  "data_counts": {
+    "CancerType": 6,
+    "AppUser": 3,
+    "Professional": 2,
+    "Patient": 300,
+    "TumorSample": 300,
+    "Gene": 11673,
+    "Variant": 24140,
+    "SampleMutation": 24513
+  },
+  "checks": {
+    "300_unique_patients": true,
+    "50_patients_each_study": true,
+    "300_unique_samples": true,
+    "all_mutation_patient_sample_links_valid": true,
+    "all_24513_mutation_rows_retained": true,
+    "variant_gene_sample_mapping_roundtrip": true,
+    "in_memory_relational_foreign_key_check": true,
+    "bcrypt_hash_verified_with_system_crypt": true
+  },
+  "limitations": [
+    "MySQL server and PHP runtime unavailable here: actual SQL import, PHP syntax/runtime, and PHP password_verify require local testing.",
+    "In-memory relational validation is NOT a MySQL import test."
+  ]
+}
