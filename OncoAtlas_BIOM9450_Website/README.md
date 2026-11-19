@@ -1,6 +1,6 @@
 # OncoAtlas — BIOM9450 Cancer Research Portal
 
-A functioning **PHP 8 + MySQL** research web application built around the exact tables in the provided `sample_data.sql` file. It uses custom HTML/CSS, vanilla JavaScript and AJAX (Fetch API). **The machine-learning model is intentionally not included.** The prediction screens read saved results when a teammate eventually integrates a trained model; they do not invent scores.
+A functioning **PHP 8 + MySQL** research web application built around the exact tables in the provided `sample_data.sql` file. It uses custom HTML/CSS, vanilla JavaScript and AJAX (Fetch API). A random-forest model trained on TCGA data predicts cancer type from a patient's mutation profile (**Run prediction**); see `docs/PREDICTION.md`.
 
 **Important:** This is an academic demonstration, not a diagnostic or clinical system. The uploaded SQL explicitly states that its mutation observations come from TCGA while its patient display demographics are **synthetic**. The website flags synthetic demographics rather than presenting them as verified clinical data.
 
@@ -22,8 +22,9 @@ OncoAtlas_BIOM9450_Website/
 ├── professionals.php          Researcher/oncologist profiles
 ├── analytics.php              Researcher-only AJAX charts and comparison
 ├── upload.php                 Small TSV mutation imports (transactional)
-├── predictions.php            Saved prediction history (future model)
-├── prediction.php             Existing scores and feedback form
+├── predict.php                Run prediction: model + interactive chart (predictive analysis)
+├── predictions.php            Saved prediction history
+├── prediction.php             Saved scores and feedback form
 ├── feedback.php               Store feedback on existing predictions
 ├── activity.php               Audit entries for the current account
 ├── account.php                Change your own account password
@@ -92,6 +93,10 @@ Check which PHP binary is running: `php -v`. Check MySQL driver: `php -m | grep 
 
 The source SQL contains existing bcrypt hashes, but their plaintext passwords were **not supplied**. The setup script deliberately replaces demo account password hashes rather than pretending to know those passwords.
 
+In the group's database package (`biom_project/database/sample_data.sql`), all three demo accounts share the local demo password `DemoCancer!2026`. You can sign in with it straight after importing, without running the setup script. Running the setup script replaces it with random passwords.
+
+Tip: instead of editing `config/config.php`, create `config/config.local.php` containing for example `<?php return ['db_pass' => 'your-password'];`. Git ignores this file, so your MySQL password is never committed.
+
 ## 4. Feature walkthrough
 
 **Overview:** Live totals calculated from MySQL, two charts fetched via `api/stats.php`, and recent patient links.
@@ -106,14 +111,13 @@ The source SQL contains existing bcrypt hashes, but their plaintext passwords we
 
 **Import mutations:** For an existing or newly created patient, enter a sample barcode (either an existing barcode belonging to that patient or a new one), choose a `.tsv`/`.txt` with cBioPortal-like tab-delimited columns, then import. The importer validates all rows, uses prepared statements and an exclusive MySQL advisory lock, and commits the whole batch or none. Limit: 5 MB and 1,000 rows per file. This is a **small demonstration importer**, not a replacement for the supplied full-cohort SQL dump. Duplicate sample/gene/variant/classification/protein combinations are skipped; source rows already present are not modified. For a test, change the example TSV’s barcode to match your form selection.
 
-**Predictions:** Only displays results already stored in `Prediction`, `PredictionScore`, and `PredictionMutation`. An explanatory integration panel is shown while the ML system is unavailable. Feedback is available only for real, saved prediction records.
+**Run prediction / Predictions:** Choose a patient and the random forest predicts the most likely of six cancer types from their saved mutations. It runs in JavaScript, and an interactive chart shows all six scores. Saving recomputes the result on the server and stores `Prediction`, `PredictionScore` and `PredictionMutation` in one transaction. Feedback is then given on `prediction.php`. Details: `docs/PREDICTION.md`.
 
 **Security:** Prepared PDO queries, HTML output escaping, session regeneration, bcrypt passwords, CSRF form tokens, file validation, role checks and audit records. `activity.php` displays recent actions for the current professional account.
 
 ## 5. Important limits
 
-- There is **no machine-learning model**, no prediction endpoint and no fake prediction confidence output.
-- Predictions and feedback require a teammate to store actual results first. See `docs/MODEL_HANDOFF.md`.
+- Prediction scores come from a research model (79 % held-out accuracy across six TCGA cancer types). They are not calibrated clinical probabilities. See `docs/PREDICTION.md` for limitations.
 - This project is an academic demonstration using TCGA research data and synthetic display demographics, **not** suitable for real patient records or public deployment without extensive security/privacy review.
 - The `Photo`, `Country`, `Treatment`, `Age` and `Sex` fields in the supplied demo records are synthetic and should not be interpreted as original TCGA clinical measurements.
 - PHP and MySQL must be configured locally; this package is source code, not a hosted website.
@@ -123,5 +127,5 @@ The source SQL contains existing bcrypt hashes, but their plaintext passwords we
 
 - Data: your uploaded `sample_data.sql` (copied byte-for-byte to `database/sample_data.sql`).
 - Programme: BIOM9450, Web-Based Cancer Type Prediction System.
-- Scope: functioning website and SQL integration; teammate's ML model to be integrated later.
+- Scope: functioning website, SQL integration and integrated predictive model.
 - Test checklist: `docs/MANUAL_TESTS.md`.

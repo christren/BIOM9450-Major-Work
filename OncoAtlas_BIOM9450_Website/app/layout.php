@@ -33,6 +33,7 @@ function start_page(string $title, string $active, string $description='', strin
         ['professionals.php','Research team','users'],
         ['analytics.php','Analytics','chart'],
         ['upload.php','Import mutations','upload'],
+        ['predict.php','Run prediction','spark'],
         ['predictions.php','Predictions','spark'],
         ['activity.php','Activity log','log'],
         ['account.php','My account','shield'],

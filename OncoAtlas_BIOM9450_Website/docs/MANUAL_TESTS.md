@@ -15,8 +15,12 @@ These are **manual steps for you to perform after installing MySQL locally**. PH
 | T09 | On that profile, use Import mutations with example TSV | A new sample and mutation observation are created, or duplicates are skipped; audit has IMPORT_MUTATIONS |
 | T10 | Upload a TSV with an invalid genomic coordinate or mismatched sample barcode | Import rejected; no partial rows saved |
 | T11 | Log in as demo patient and request another patient's `patient.php?id=...` or `/api/mutations.php` | HTTP 403; only linked patient information accessible |
-| T12 | Open Predictions before teammate integrates the model | Clear "not connected" state; **no invented prediction scores** |
-| T13 | After a real Prediction and PredictionScore are inserted by the model teammate, open details and submit feedback | Saved scores display, Feedback row is created with correct PredictionID/UserID |
+| T12 | Open Run prediction, choose patient #19 and wait for the result | Chart shows six scores; Breast predicted; "Held-out test patient" and "matches" chips shown |
+| T13 | Click Save prediction, then submit feedback on the prediction page | Redirects to `prediction.php?id=…` with the same scores and "Based on 56 linked mutation records"; feedback appears after reload |
+| T16 | On Run prediction, preview `biom_project/model_output_tcga_v2/examples/test_paad_TCGA-FB-A7DR.tsv` | Pancreas predicted; no Save button (preview only) |
+| T17 | Preview a file with two patients, missing columns, or an empty file | Clear error message; no result shown |
+| T18 | Log in as the patient account and open `predict.php` or `api/save_prediction.php` | HTTP 403 |
+| T19 | Run the automated tests listed in `docs/PREDICTION.md` | All tests pass |
 | T14 | Change password through My account | Existing password required; new hash stored; log-out/log-in uses new credentials |
 | T15 | Resize to mobile width | Sidebar opens via menu; tables scroll horizontally; cards reflow |
 
