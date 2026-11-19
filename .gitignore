@@ -16,3 +16,6 @@ venv/
 .vscode/
 .DS_Store
 Thumbs.db
+
+# Unzipped website, already have zipped on repo
+OncoAtlas_BIOM9450_Website
