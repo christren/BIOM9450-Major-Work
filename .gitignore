@@ -17,5 +17,5 @@ venv/
 .DS_Store
 Thumbs.db
 
-# Unzipped website, already have zipped on repo
-OncoAtlas_BIOM9450_Website
+# Website: tracked as normal files. Local DB credentials stay private.
+OncoAtlas_BIOM9450_Website/config/config.local.php
