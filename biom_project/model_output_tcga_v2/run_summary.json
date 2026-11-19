@@ -1,0 +1,13 @@
+{
+ "model_version": "tcga-rf-compact-v2",
+ "raw_rows": 296317,
+ "rows_after_dedup": 295547,
+ "patients": 2745,
+ "train_patients": 2196,
+ "test_patients": 549,
+ "dense_features": 31,
+ "genes": 300,
+ "candidate_genes": 20290,
+ "best_model_by_cv": "Random Forest",
+ "runtime_s": 77
+}

@@ -1,0 +1,15 @@
+<?php
+require_once __DIR__.'/app/layout.php';require_login();
+$predictions=[];
+if(is_professional()) {
+ $predictions=query_rows('SELECT pr.PredictionID,pr.PatientID,pr.ModelVersion,pr.CreatedAt,p.Name,u.Name AS CreatedByName FROM Prediction pr JOIN Patient p ON p.PatientID=pr.PatientID JOIN AppUser u ON u.UserID=pr.CreatedBy ORDER BY pr.CreatedAt DESC,pr.PredictionID DESC LIMIT 80');
+} else {
+ $id=linked_patient_id();
+ if($id) $predictions=query_rows('SELECT pr.PredictionID,pr.PatientID,pr.ModelVersion,pr.CreatedAt,p.Name,u.Name AS CreatedByName FROM Prediction pr JOIN Patient p ON p.PatientID=pr.PatientID JOIN AppUser u ON u.UserID=pr.CreatedBy WHERE pr.PatientID=? ORDER BY pr.CreatedAt DESC,pr.PredictionID DESC LIMIT 80',[$id]);
+}
+audit('VIEW_PREDICTIONS','Prediction',null);
+start_page('Predictions','predictions.php','Saved cancer-type predictions and their feedback.','MODEL INTEGRATION');
+?><section class="future-banner"><div class="future-icon"><?=icon('spark')?></div><div><span class="overline">MODEL CONNECTED</span><h2>Random forest model integrated.</h2><p>Predictions are generated on the Run prediction page from a patient’s saved mutation profile, recomputed by the server, and stored in Prediction, PredictionScore and PredictionMutation.</p></div><?php if(is_professional()):?><a class="button primary" href="predict.php"><?=icon('spark')?> Run prediction</a><?php endif;?></section>
+<section class="panel"><div class="panel-title"><div><h2>Saved prediction history</h2><p>Displays records only when real predictions have been stored</p></div></div><?php if($predictions):?><div class="table-scroll"><table><thead><tr><th>Prediction ID</th><th>Patient</th><th>Model version</th><th>Recorded by</th><th>Date</th><th></th></tr></thead><tbody><?php foreach($predictions as $p):?><tr><td class="mono">#<?=h($p['PredictionID'])?></td><td><?=h($p['Name'])?></td><td><?=h($p['ModelVersion'])?></td><td><?=h($p['CreatedByName'])?></td><td><?=h($p['CreatedAt'])?></td><td><a class="row-link" href="prediction.php?id=<?=$p['PredictionID']?>">Details <?=icon('chevron')?></a></td></tr><?php endforeach;?></tbody></table></div><?php else:?><?php empty_state('No predictions recorded yet','Open Run prediction, choose a patient and save a prediction to see it here.');?><?php endif;?></section>
+<section class="panel model-notes"><div class="panel-title"><div><h2>Where the model will connect</h2><p>Database structures already supplied for future integration</p></div></div><div class="integration-grid"><div><span class="number-tag">01</span><strong>ModelInput</strong><p>A database view containing sample mutation features, gene symbols and variant information.</p></div><div><span class="number-tag">02</span><strong>Prediction</strong><p>Model version, patient, time and user who generated the prediction.</p></div><div><span class="number-tag">03</span><strong>PredictionScore</strong><p>One predicted score per cancer type, between zero and one.</p></div><div><span class="number-tag">04</span><strong>Feedback</strong><p>Users can comment on saved predictions once results exist.</p></div></div></section>
+<?php end_page();

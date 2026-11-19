@@ -1,0 +1,30 @@
+/*
+Run prediction page styles; uses the site's existing CSS variables from style.css.
+Component Owner: Chris (z5417031)
+Summary: Styles the prediction result headline, interactive score chart, mutation spectrum and save actions.
+
+*/
+.predict-divider{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase}
+.predict-divider::before,.predict-divider::after{content:"";flex:1;border-top:1px solid var(--border)}
+.predict-headline{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;align-items:flex-end;margin:6px 0 18px}
+.predict-headline strong{display:block;font-size:32px;line-height:1.1;margin:4px 0}
+.predict-headline span:not(.overline):not(.chip){color:var(--muted);font-size:13px}
+#resultChecks{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end;max-width:560px}
+.predict-toolbar{display:flex;gap:8px;margin-bottom:12px}
+.predict-toolbar [aria-pressed="true"]{border-color:var(--purple);color:var(--purple)}
+.pred-chart{display:grid;gap:10px}
+.pred-row{display:grid;grid-template-columns:150px minmax(0,1fr) 60px;align-items:center;gap:13px;padding:4px 6px;border-radius:8px;cursor:pointer;outline:none}
+.pred-row:hover,.pred-row:focus{background:#f5f4ff}
+.pred-row.top .pred-label{font-weight:800;color:var(--ink)}
+.pred-label{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pred-track{height:16px;background:#f2f4f9;border-radius:8px;overflow:hidden}
+.pred-track i{display:block;height:100%;width:0;border-radius:8px;transition:width .6s ease}
+.pred-chart:not(.ready) .pred-track i{width:0!important}
+.pred-chart.small .pred-row{grid-template-columns:60px minmax(0,1fr) 52px;cursor:default}
+.pred-chart.small .pred-track{height:9px}
+.predict-details{margin-top:22px}
+.predict-details h3{font-size:14px;margin:0 0 12px}
+#saveActions{margin-top:18px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+#saveActions[hidden]{display:none}
+#saveActions small{color:var(--muted)}
+@media (max-width:700px){.pred-row{grid-template-columns:90px minmax(0,1fr) 50px}.predict-headline strong{font-size:24px}}

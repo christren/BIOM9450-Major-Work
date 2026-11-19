@@ -1,0 +1,5 @@
+Hugo_Symbol	NCBI_Build	Chromosome	Start_Position	End_Position	Reference_Allele	Tumor_Seq_Allele2	Variant_Classification	Variant_Type	Tumor_Sample_Barcode	IMPACT	HGVSp_Short
+FAKEGENE1	GRCh37	1	1000	1000	G	A	Missense_Mutation	SNP	DEMO-UNKNOWN-01		
+FAKEGENE2	GRCh37	2	2000	2001	-	AT	Frame_Shift_Ins	INS	DEMO-UNKNOWN-01		
+FAKEGENE3	GRCh37	3	3000	3002	CTG	-	Weird_Class	DEL	DEMO-UNKNOWN-01		
+FAKEGENE4	GRCh37	4	4000	4001	AC	GT	Missense_Mutation	DNP	DEMO-UNKNOWN-01		

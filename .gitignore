@@ -16,3 +16,6 @@ venv/
 .vscode/
 .DS_Store
 Thumbs.db
+
+# Website: tracked as normal files. Local DB credentials stay private.
+OncoAtlas_BIOM9450_Website/config/config.local.php
