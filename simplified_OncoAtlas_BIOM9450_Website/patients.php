@@ -1,0 +1,70 @@
+<?php
+// Patient directory: display search fields and an initially empty table. assets/js/app.js sends the filters to api/patients.php and fills the table with the returned JSON.
+
+require_once __DIR__.'/app/layout.php';require_professional();audit('VIEW_PATIENTS','Patient',null);
+start_page('Patient explorer','patients.php','Search and filter research profiles across all six cancer cohorts.','CLINICAL RECORDS');
+?>
+<div class="toolbar">
+<div class="toolbar-actions">
+<span class="chip informative">De-identified / teaching data</span>
+</div>
+<a href="add_patient.php" class="button primary">
+<?=icon('plus')?> Add patient</a>
+</div>
+<section class="panel">
+<form class="filters" id="patientsFilters" autocomplete="off">
+<div class="search-field">
+<label for="patientSearch">Search patients</label>
+<div class="search-inner">
+<?=icon('search')?>
+<input type="search" id="patientSearch" name="q" placeholder="Search name or TCGA ID" maxlength="100">
+</div>
+</div>
+<div class="filter-field">
+<label for="patientCohort">Cancer type</label>
+<select name="cancer" id="patientCohort">
+<option value="">All cancer types</option>
+<?php cohort_options((string)($_GET['cancer']??''));?>
+</select>
+</div>
+<div class="filter-field">
+<label for="patientSex">Sex</label>
+<select name="sex" id="patientSex">
+<option value="">All</option>
+<option value="Male">Male</option>
+<option value="Female">Female</option>
+</select>
+</div>
+<button type="button" class="button subtle" id="resetPatients">Clear filters</button>
+</form>
+<div id="patientsStatus" class="results-summary" role="status">Loading patient records…</div>
+<div class="table-scroll">
+<table>
+<thead>
+<tr>
+<th>Patient</th>
+<th>TCGA ID</th>
+<th>Cancer cohort</th>
+<th>Age</th>
+<th>Sex</th>
+<th>Samples</th>
+<th>Mutations</th>
+<th>
+</th>
+</tr>
+</thead>
+<tbody id="patientsBody">
+<tr>
+<td colspan="8">Loading…</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="pagination">
+<button type="button" class="button subtle" id="patientsPrev">← Previous</button>
+<span id="patientsPage" aria-live="polite">Page 1</span>
+<button type="button" class="button subtle" id="patientsNext">Next →</button>
+</div>
+</section>
+<script>window.addEventListener('DOMContentLoaded',()=>window.OncoTables?.patients());</script>
+<?php end_page();
